@@ -1,21 +1,52 @@
-import React from "react"
-import { FaPlus,FaTrash } from 'react-icons/fa';
+import React,{useState, useEffect} from "react"
+import Todos from "./components/Todos"
+import TodoForm from "./components/TodoForm"
 
 function App() {
+  const [todos, setTodos] = useState([])
+
+  const addTodo = async todo => {
+    setTodos([todo,...todos])
+  }
+
+  const removeAllTodos = () => {
+    if(localStorage.getItem("todos")) {
+      localStorage.clear()
+      document.location.reload()
+      alert("All Todos removed")
+    } else{
+      alert('There is no todo in localStorage')
+    }
+  }
+
+  const markAsCompleted = (id) => {
+    let updatedTodo = todos.map((todo) => {
+      if(todo.id === id) {
+        return {...todo, markAsCompleted: !todo.markAsCompleted}
+      }
+      return todo
+    })
+    setTodos(updatedTodo)
+  }
+
+  useEffect(() => {
+    const localTodos = localStorage.getItem("todos")
+    if(localTodos){
+      setTodos(JSON.parse(localTodos))
+    }
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("todos",JSON.stringify(todos));
+  },[todos])
+
   return (
     <div className="flex flex-col items-center h-screen bg-gradient-to-br from-[#ec2c2c] to-[#e9993d] text-white">
       <h1 className="text-4xl mx-6 mt-6 uppercase font-bold">Add Todo List</h1>
       <div className="border-t-4 border-white w-8 mb-5 mt-2"></div>
-      <div className="flex w-full justify-center">
-        <div className="flex justify-center items-center w-[75%] lg:w-[60%] xl:w-[50%]">
-          <input className="p-2 text-base float-left w-full" type="text" placeholder="Add Task..."/>
-          <div className="flex items-center justify-center p-2 text-base bg-[#e9993d] h-full">
-            <FaPlus />
-          </div>
-          <div className="flex items-center justify-center p-2 text-base bg-[#ec2c2c] h-full">
-            <FaTrash />
-          </div>
-        </div>
+      <div className="flex flex-col w-full items-center">
+        <TodoForm addTodo={addTodo} removeAllTodos={removeAllTodos}/>
+        <Todos todos={todos} markAsCompleted={markAsCompleted}/>
       </div>
     </div>
   );
