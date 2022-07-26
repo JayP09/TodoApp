@@ -8,7 +8,7 @@ This Todo App was created using React and TailwindCSS. From this project, I got 
 
 <img src="./assets/todoapp2.png">
 
-<img src="./assets/Todoapp3.png">
+<img src="./assets/TodoApp3.png">
 
 <img src="./assets/todoapp4.png">
 
