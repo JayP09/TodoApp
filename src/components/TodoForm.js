@@ -11,7 +11,7 @@ const TodoForm = ({addTodo, removeAllTodos}) => {
 
     const handleSubmit = () => {
         if(currentInput === "") {
-            alert("Please Enter some value")
+          return alert("Please Enter some value")
         }
         let todo = {
             task: currentInput,
@@ -35,13 +35,13 @@ const TodoForm = ({addTodo, removeAllTodos}) => {
             onChange={(e) => setCurrentInput(e.target.value)} 
           />
           <div 
-            className="flex items-center justify-center py-2 px-3 text-base bg-[#e9993d] h-full cursor-pointer"
+            className="flex items-center justify-center p-3 text-base bg-[#e9993d] h-full cursor-pointer"
             onClick={handleSubmit}
           >
             <FaPlus />
           </div>
           <div 
-            className="flex items-center justify-center py-2 px-3 text-base bg-[#ec2c2c] h-full cursor-pointer" 
+            className="flex items-center justify-center p-3 text-base bg-[#ec2c2c] h-full cursor-pointer" 
             onClick={removeAllTodos}
           >
             <FaTrash />
