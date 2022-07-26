@@ -30,8 +30,14 @@ const Todo = ({updateTodo, removeTodo, todo, markAsCompleted}) => {
                     <Icon icon={<FaEdit />} color="bg-[#563EC1]" click={editTodo}/>
                 ) : ( 
                     <Icon icon={<FaUpload />} color="bg-[#563EC1]" click={() => {
-                        updateTodo(todo.id, input)
-                        setEditMode((oldValue) => !oldValue)
+                        if(todo.task !== input && input !== ""){
+                            updateTodo(todo.id, input)
+                            setEditMode((oldValue) => !oldValue)
+                        } else if(input === "") {
+                            alert("Task can't be empty")
+                        } else {
+                            alert("change something")
+                        }
                     }}
                     />
                 )

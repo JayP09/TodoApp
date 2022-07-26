@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from "react"
-import Todos from "./components/Todos"
-import TodoForm from "./components/TodoForm"
+import Todos from "./pages/Todos"
+import TodoForm from "./pages/TodoForm"
 
 function App() {
   const [todos, setTodos] = useState([])
